@@ -55,11 +55,13 @@ class OwnerController {
 		dataBinder.setDisallowedFields("id");
 	}
 
+    // /owners/new GET 요청이 들어오면 GetMapping 어노테이션을 보고
+    // dispatcherServlet이 이 메소드를 호출함
 	@GetMapping("/owners/new")
 	public String initCreationForm(Map<String, Object> model) {
 		Owner owner = new Owner();
 		model.put("owner", owner);
-		return VIEWS_OWNER_CREATE_OR_UPDATE_FORM;
+		return VIEWS_OWNER_CREATE_OR_UPDATE_FORM; // return하면 해당 경로로 찾아들어감(owners/createOrUpdateOwnerForm)
 	}
 
 	@PostMapping("/owners/new")
