@@ -15,6 +15,7 @@
  */
 package org.springframework.samples.petclinic.owner;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.visit.VisitRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -45,9 +46,23 @@ class OwnerController {
 
 	private VisitRepository visits;
 
-	public OwnerController(OwnerRepository clinicService, VisitRepository visits) {
+    // 의존성 주입 1. 필드
+    // @Autowired
+    // private PetRepository pets;
+
+    // 의존성 주입 2. Setter
+    // private PetRepository pets;
+    // @Autowired
+    // public void setPets(PetRepository pets) {
+    //     this.pets = pets;
+    // }
+
+    // 의존성 주입 3. 생성자
+    private PetRepository pets;
+	public OwnerController(OwnerRepository clinicService, VisitRepository visits, PetRepository pets) {
 		this.owners = clinicService;
 		this.visits = visits;
+		this.pets = pets;
 	}
 
 	@InitBinder
