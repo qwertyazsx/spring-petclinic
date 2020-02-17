@@ -43,7 +43,8 @@ public interface OwnerRepository extends Repository<Owner, Integer> {
 	 * found)
 	 */
 	@Query("SELECT DISTINCT owner FROM Owner owner left join fetch owner.pets WHERE owner.lastName LIKE %:lastName%")
-	@Transactional(readOnly = true)
+	@Transactional(readOnly = true) // jdbc에서 connection의 setautocommit을 false로 하고,
+                                    // commit 또는 rollback하는 코드를 생략할 수 있게 해줌 (Proxy 패턴 생성 방식과 동일)
 	Collection<Owner> findByLastName(@Param("lastName") String lastName);
 
     @Query("SELECT DISTINCT owner FROM Owner owner left join fetch owner.pets WHERE owner.firstName LIKE %:firstName%")
